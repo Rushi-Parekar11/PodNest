@@ -1,11 +1,17 @@
 import React from 'react'
+import {Routes,Route} from 'react-router-dom'
+import Home from './Pages/Home'
+import Navbar from './Components/Navbar'
+import First from './Components/First'
 
 function App() {
   return (
     <>
-    <div className='h-[100vh] w-[100%] bg-gray-600'>
-      <h1 className='text-red-500'>hi</h1>
-    </div>
+    <Navbar/>
+    <Routes>
+      <Route  path="/" element={<Home />}/>
+    </Routes>
+    
     </>
 
   )
