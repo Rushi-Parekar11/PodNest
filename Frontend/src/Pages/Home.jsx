@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import podcastIcon from '../assets/podcastIcon.png';
 import { FaArrowRight  } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 
 
 function Home() {
@@ -9,10 +10,12 @@ function Home() {
   useEffect(() => {
     const timers = [
       setTimeout(() => setPhase('welcome'), 500),   // After 0.5s
-      setTimeout(() => setPhase('main'), 2000),     // After 4s
+      setTimeout(() => setPhase('main'), 1000),     // After 4s
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
+
+  const navigate = useNavigate();
 
   return (
     <div className="h-[90vh] w-full bg-[#121212] relative overflow-hidden">
@@ -69,9 +72,10 @@ function Home() {
   While we put the final touches in place, we’re rolling out access gradually to ensure everything runs smoothly.
 </p>
 
-             <div className="h-9 w-[240px] bg-[#0077ff] rounded-3xl text-white flex items-center justify-center gap-1 mt-4 mb-2 cursor-pointer hover:bg-[#0053b3]"><p>Get your username</p><FaArrowRight /> </div>
+             <div className="h-9 w-[240px] bg-[#0077ff] rounded-3xl text-white flex items-center justify-center gap-1 mt-4 mb-2 cursor-pointer hover:bg-[#0053b3]" 
+             onClick={()=>navigate("authenticate")}><p>Let's go</p><FaArrowRight /> </div>
 
-             <p className='text-[#0077ff] text-sm cursor-pointer hover:text-[#fdba00]'>already have account ? Sign in</p>
+             {/* <p className='text-[#0077ff] text-sm cursor-pointer hover:text-[#fdba00]' onClick={()=>navigate('login')}>already have account ? Sign in</p> */}
         </div>
       </div>
     </div>
