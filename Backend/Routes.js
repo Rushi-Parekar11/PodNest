@@ -6,13 +6,22 @@ router.post('/ping',(req,res)=>{
     res.send("done")
 })
 
-router.post('/api/sendotp',(req,res)=>{
+router.post('/api/sendotp',async(req,res) =>{
     const {phone} = req.body;
     if(!phone){
         res.status(400).json({message:"Phone Number is required"});
     }
-    const otp = otpServices.generateOtp();
-    req.send(otp);
+    const otp = await otpServices.generateOtp();
+
+    //hashing the otp
+    const ttl = 1000 * 60 * 2;
+    const expire = Date.now() + ttl;
+    const data = `${phone}.${otp}.${expire}`;
+    const hash = otpServices.hashOtp(data)
+    res.json({
+        hash
+    });
+
 })
 
 

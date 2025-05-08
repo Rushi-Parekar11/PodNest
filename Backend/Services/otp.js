@@ -1,7 +1,8 @@
 const crypto = require('crypto');
 
+
 class otpServices{
-    generateOtp(){
+    async generateOtp(){
         const otp = crypto.randomInt(1000,9999);
         return otp;
     }
@@ -12,6 +13,10 @@ class otpServices{
 
     verfiyOtp(){
 
+    }
+
+    hashOtp(data){
+        return crypto.createHmac('sha256' , 'rushi').update(data).digest('hex');
     }
 
 }
